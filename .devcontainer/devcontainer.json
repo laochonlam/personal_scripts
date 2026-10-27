@@ -1,0 +1,43 @@
+{
+    "name": "testing",
+    "image": "nvcr.io/nvidia/pytorch:24.12-py3",
+    "runArgs": [
+        "--privileged",
+        "--ipc=host",
+        "--net=host",
+        "--pid=host",
+        "--cgroupns=host",
+        "--gpus=all",
+        "--device=/dev/infiniband",
+        "--tmpfs=/run",
+        "--ulimit",
+        "memlock=-1:-1",
+        "--security-opt",
+        "seccomp=unconfined",
+        "-v",
+        "/proc:/proc",
+        "-v",
+        "/sys:/sys",
+        "-v",
+        "/etc/localtime:/etc/localtime",
+        "-v",
+        "/etc/hosts:/etc/hosts",
+        "-v",
+        "/root/.ssh/:/root/.ssh/",
+        "-v",
+        "/home/ubuntu/.ssh/:/home/ubuntu/.ssh/",
+        "-e",
+        "GLIBC_TUNABLES=glibc.pthread.rseq=0"
+    ],
+    "containerUser": "root",
+    "remoteUser": "root",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace/${localWorkspaceFolderBasename},type=bind",
+    "workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            }
+        }
+    }
+}
